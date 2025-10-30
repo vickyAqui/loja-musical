@@ -1,0 +1,172 @@
+.detalhes-pedido-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.btn-voltar {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+
+.btn-voltar:hover {
+  text-decoration: underline;
+}
+
+.detalhes-pedido-page h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.detalhes-container {
+  display: grid;
+  gap: 30px;
+}
+
+.detalhes-card,
+.itens-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.detalhes-card h2,
+.itens-card h2 {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 22px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.info-item .label {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.info-item .value {
+  color: #333;
+  font-size: 16px;
+}
+
+.info-item .value.destaque {
+  color: #27ae60;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.itens-lista {
+  margin-bottom: 20px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-placeholder {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  opacity: 0.5;
+}
+
+.item-info h3 {
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.item-info p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.item-subtotal {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.total-final {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-top: 2px solid #333;
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .item-info {
+    width: 100%;
+  }
+
+  .item-subtotal {
+    align-self: flex-end;
+  }
+}

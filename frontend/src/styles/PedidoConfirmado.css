@@ -1,0 +1,101 @@
+.pedido-confirmado-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.sucesso-card {
+  background: white;
+  padding: 60px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.sucesso-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.sucesso-card h1 {
+  color: #27ae60;
+  margin-bottom: 15px;
+}
+
+.sucesso-mensagem {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.pedido-info {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.pedido-info h2 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.pedido-info p {
+  color: #666;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pedido-info strong {
+  color: #333;
+}
+
+.pedido-itens {
+  text-align: left;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.pedido-itens h3 {
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.item-resumo {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.item-resumo:last-child {
+  border-bottom: none;
+}
+
+.acoes {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .sucesso-card {
+    padding: 40px 20px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .acoes .btn {
+    width: 100%;
+  }
+}

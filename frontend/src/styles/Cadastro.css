@@ -1,0 +1,108 @@
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.cadastro-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 800px;
+}
+
+.cadastro-card h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.cadastro-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.form-section h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.cadastro-card button[type="submit"] {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.cadastro-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+.cadastro-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.cadastro-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .cadastro-card {
+    padding: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
