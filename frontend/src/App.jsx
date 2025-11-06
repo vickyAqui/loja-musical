@@ -14,7 +14,9 @@ import './App.css';
 const App = () => {
   const { adicionarAoCarrinho } = useCarrinho();
   const [produtos, setProdutos] = useState([]);
+  const [produtosFiltrados, setProdutosFiltrados] = useState([]);
   const [categoriaAtiva, setCategoriaAtiva] = useState('todos');
+  const [termoBusca, setTermoBusca] = useState('');
   const [loading, setLoading] = useState(true);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
@@ -31,6 +33,15 @@ const App = () => {
     }
 
     // Buscar produtos
+    carregarProdutos();
+  }, []);
+
+  // Atualizar produtos filtrados quando mudar categoria ou termo de busca
+  useEffect(() => {
+    filtrarProdutos();
+  }, [produtos, categoriaAtiva, termoBusca]);
+
+  const carregarProdutos = () => {
     axios.get('http://localhost:3001/api/instrumentos')
       .then(response => {
         setProdutos(response.data);
@@ -40,7 +51,52 @@ const App = () => {
         console.error('Erro ao buscar produtos:', error);
         setLoading(false);
       });
-  }, []);
+  };
+
+  const filtrarProdutos = () => {
+    let resultados = produtos;
+
+    // Filtrar por categoria
+    if (categoriaAtiva !== 'todos') {
+      resultados = resultados.filter(p => p.categoria_id === parseInt(categoriaAtiva));
+    }
+
+    // Filtrar por termo de busca
+    if (termoBusca.trim() !== '') {
+      const termo = termoBusca.toLowerCase();
+      resultados = resultados.filter(p => 
+        p.nome.toLowerCase().includes(termo) || 
+        (p.marca && p.marca.toLowerCase().includes(termo))
+      );
+    }
+
+    setProdutosFiltrados(resultados);
+  };
+
+  const handleBuscar = async (termo) => {
+    setTermoBusca(termo);
+    
+    // Se o termo estiver vazio, apenas filtra localmente
+    if (!termo || termo.trim() === '') {
+      return;
+    }
+
+    // Buscar no backend para ter resultados mais precisos
+    try {
+      const response = await axios.get(`http://localhost:3001/api/instrumentos/buscar?q=${termo}`);
+      
+      // Se há termo de busca, mostra os resultados da API
+      // Aplicar filtro de categoria se houver
+      let resultados = response.data;
+      if (categoriaAtiva !== 'todos') {
+        resultados = resultados.filter(p => p.categoria_id === parseInt(categoriaAtiva));
+      }
+      
+      setProdutosFiltrados(resultados);
+    } catch (error) {
+      console.error('Erro ao buscar produtos:', error);
+    }
+  };
 
   const categoriasMap = {
     'todos': 'Todos os Produtos',
@@ -49,10 +105,6 @@ const App = () => {
     '3': 'CD',
     '4': 'Diversos'
   };
-
-  const produtosFiltrados = categoriaAtiva === 'todos' 
-    ? produtos 
-    : produtos.filter(p => p.categoria_id === parseInt(categoriaAtiva));
 
   const handleProductClick = (produto) => {
     setProdutoSelecionado(produto);
@@ -133,6 +185,7 @@ const App = () => {
         onLoginClick={handleOpenLogin}
         onMeusPedidosClick={handleOpenMeusPedidos}
         onCarrinhoClick={handleOpenCarrinho}
+        onBuscar={handleBuscar}
         clienteLogado={clienteLogado}
         onLogout={handleLogout}
       />
@@ -165,12 +218,30 @@ const App = () => {
         </div>
 
         <div className="products-container">
-          <h2 className="category-title">{categoriasMap[categoriaAtiva]}</h2>
+          <h2 className="category-title">
+            {termoBusca ? `Resultados para "${termoBusca}"` : categoriasMap[categoriaAtiva]}
+            {termoBusca && ` (${produtosFiltrados.length} produtos)`}
+          </h2>
           
           {loading ? (
             <p className="loading">Carregando produtos...</p>
           ) : produtosFiltrados.length === 0 ? (
-            <p className="no-products">Nenhum produto encontrado nesta categoria.</p>
+            <div className="no-products">
+              <p>
+                {termoBusca 
+                  ? `Nenhum produto encontrado para "${termoBusca}".`
+                  : 'Nenhum produto encontrado nesta categoria.'
+                }
+              </p>
+              {termoBusca && (
+                <button 
+                  className="btn-limpar-busca"
+                  onClick={() => setTermoBusca('')}
+                >
+                  Limpar busca
+                </button>
+              )}
+            </div>
           ) : (
             <div className="products-grid">
               {produtosFiltrados.map(produto => (

@@ -6,9 +6,29 @@ import { BiDisc } from 'react-icons/bi';
 import { MdAlbum } from 'react-icons/md';
 import './Header.css';
 
-const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoClick, clienteLogado, onLogout }) => {
+const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoClick, onBuscar, clienteLogado, onLogout }) => {
   const { getTotalItens } = useCarrinho();
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (onBuscar) {
+      onBuscar(searchTerm);
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    
+    // Busca em tempo real após 300ms de pausa na digitação
+    if (onBuscar) {
+      clearTimeout(window.searchTimeout);
+      window.searchTimeout = setTimeout(() => {
+        onBuscar(value);
+      }, 300);
+    }
+  };
 
   return (
     <header className="header">
@@ -24,15 +44,17 @@ const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoC
         </div>
         
         <div className="search-bar">
-          <input 
-            type="text" 
-            placeholder="O que você está procurando?"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button className="search-button">
-            <FiSearch />
-          </button>
+          <form onSubmit={handleSearch}>
+            <input 
+              type="text" 
+              placeholder="Buscar por nome ou marca..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+            <button type="submit" className="search-button">
+              <FiSearch />
+            </button>
+          </form>
         </div>
 
         <div className="header-actions">
