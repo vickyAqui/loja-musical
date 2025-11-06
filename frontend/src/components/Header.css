@@ -77,6 +77,46 @@
   gap: 20px;
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.user-info .user-icon {
+  font-size: 1.5rem;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.logout-button {
+  background: transparent;
+  border: 2px solid #000;
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #8B0000;
+  border-color: #8B0000;
+  color: #fff;
+  transform: scale(1.1);
+}
+
 .user-button {
   display: flex;
   align-items: center;

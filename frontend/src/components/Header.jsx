@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
+import { FiSearch, FiShoppingCart, FiUser, FiLogOut } from 'react-icons/fi';
 import { GiGuitar, GiMusicalNotes, GiDrum } from 'react-icons/gi';
 import { BiDisc } from 'react-icons/bi';
 import { MdAlbum } from 'react-icons/md';
 import './Header.css';
 
-const Header = ({ onCadastroClick }) => {
+const Header = ({ onCadastroClick, onLoginClick, clienteLogado, onLogout }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -34,10 +34,27 @@ const Header = ({ onCadastroClick }) => {
         </div>
 
         <div className="header-actions">
-          <button className="user-button" onClick={onCadastroClick}>
-            <FiUser className="user-icon" />
-            <span className="cadastre-text">Cadastre-se</span>
-          </button>
+          {clienteLogado ? (
+            <>
+              <div className="user-info">
+                <FiUser className="user-icon" />
+                <span className="user-name">Olá, {clienteLogado.nome.split(' ')[0]}</span>
+              </div>
+              <button className="logout-button" onClick={onLogout} title="Sair">
+                <FiLogOut />
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="user-button" onClick={onLoginClick}>
+                <FiUser className="user-icon" />
+                <span className="cadastre-text">Entrar</span>
+              </button>
+              <button className="user-button" onClick={onCadastroClick}>
+                <span className="cadastre-text">Cadastre-se</span>
+              </button>
+            </>
+          )}
           <button className="cart-button">
             <FiShoppingCart />
           </button>

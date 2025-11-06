@@ -2,7 +2,7 @@ import { FaStar, FaArrowLeft, FaShoppingCart } from 'react-icons/fa';
 import { MdLocalShipping } from 'react-icons/md';
 import './ProductDetail.css';
 
-const ProductDetail = ({ produto, onBack }) => {
+const ProductDetail = ({ produto, onBack, onComprar, clienteLogado }) => {
   const categoriasMap = {
     1: 'LP/VINIL',
     2: 'Instrumentos',
@@ -89,11 +89,11 @@ const ProductDetail = ({ produto, onBack }) => {
             </div>
 
             <div className="product-actions">
-              <button className="add-to-cart-button">
+              <button className="add-to-cart-button" onClick={onComprar}>
                 <FaShoppingCart /> Adicionar ao Carrinho
               </button>
-              <button className="buy-now-button">
-                Comprar Agora
+              <button className="buy-now-button" onClick={onComprar}>
+                {clienteLogado ? 'Comprar Agora' : 'Faça Login para Comprar'}
               </button>
             </div>
           </div>

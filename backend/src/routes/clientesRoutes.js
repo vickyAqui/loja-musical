@@ -92,4 +92,56 @@ router.get('/', (req, res) => {
   });
 });
 
+// POST /api/clientes/login - Autenticar cliente
+router.post('/login', (req, res) => {
+  try {
+    const { email, senha } = req.body;
+
+    // Validação dos campos
+    if (!email || !senha) {
+      return res.status(400).json({ 
+        erro: 'Email e senha são obrigatórios' 
+      });
+    }
+
+    // Buscar cliente por email
+    const query = 'SELECT id, nome, email, telefone, senha FROM clientes WHERE email = ?';
+    
+    connection.query(query, [email], async (err, results) => {
+      if (err) {
+        console.error('Erro ao buscar cliente:', err);
+        return res.status(500).json({ erro: 'Erro ao fazer login' });
+      }
+
+      if (results.length === 0) {
+        return res.status(401).json({ 
+          erro: 'Email ou senha incorretos' 
+        });
+      }
+
+      const cliente = results[0];
+
+      // Comparar senha
+      const senhaValida = await bcrypt.compare(senha, cliente.senha);
+
+      if (!senhaValida) {
+        return res.status(401).json({ 
+          erro: 'Email ou senha incorretos' 
+        });
+      }
+
+      // Login bem-sucedido - retornar dados do cliente (sem senha)
+      const { senha: _, ...clienteSemSenha } = cliente;
+      
+      res.json({
+        mensagem: 'Login realizado com sucesso!',
+        cliente: clienteSemSenha
+      });
+    });
+  } catch (error) {
+    console.error('Erro no login:', error);
+    res.status(500).json({ erro: 'Erro interno do servidor' });
+  }
+});
+
 module.exports = router;

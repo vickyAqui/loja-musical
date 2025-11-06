@@ -4,6 +4,7 @@ import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductDetail from './components/ProductDetail';
 import CadastroCliente from './components/CadastroCliente';
+import Login from './components/Login';
 import './App.css';
 
 const App = () => {
@@ -12,8 +13,17 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
+  const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [clienteLogado, setClienteLogado] = useState(null);
 
   useEffect(() => {
+    // Verificar se há cliente logado no localStorage
+    const clienteSalvo = localStorage.getItem('cliente');
+    if (clienteSalvo) {
+      setClienteLogado(JSON.parse(clienteSalvo));
+    }
+
+    // Buscar produtos
     axios.get('http://localhost:3001/api/instrumentos')
       .then(response => {
         setProdutos(response.data);
@@ -45,6 +55,16 @@ const App = () => {
     setProdutoSelecionado(null);
   };
 
+  const handleComprarClick = () => {
+    if (!clienteLogado) {
+      setProdutoSelecionado(null);
+      setMostrarLogin(true);
+    } else {
+      // Aqui implementaríamos a lógica de compra
+      alert(`Compra iniciada! Cliente: ${clienteLogado.nome}`);
+    }
+  };
+
   const handleOpenCadastro = () => {
     setMostrarCadastro(true);
   };
@@ -58,9 +78,32 @@ const App = () => {
     // Aqui poderia redirecionar para login ou outra ação
   };
 
+  const handleOpenLogin = () => {
+    setMostrarLogin(true);
+  };
+
+  const handleCloseLogin = () => {
+    setMostrarLogin(false);
+  };
+
+  const handleLoginSucesso = (cliente) => {
+    setClienteLogado(cliente);
+    setMostrarLogin(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('cliente');
+    setClienteLogado(null);
+  };
+
   return (
     <div className="app">
-      <Header onCadastroClick={handleOpenCadastro} />
+      <Header 
+        onCadastroClick={handleOpenCadastro}
+        onLoginClick={handleOpenLogin}
+        clienteLogado={clienteLogado}
+        onLogout={handleLogout}
+      />
       
       <main className="main-content">
         <div className="hero-section">
@@ -114,6 +157,8 @@ const App = () => {
         <ProductDetail 
           produto={produtoSelecionado}
           onBack={handleCloseDetail}
+          onComprar={handleComprarClick}
+          clienteLogado={clienteLogado}
         />
       )}
 
@@ -121,6 +166,13 @@ const App = () => {
         <CadastroCliente
           onClose={handleCloseCadastro}
           onSuccess={handleCadastroSucesso}
+        />
+      )}
+
+      {mostrarLogin && (
+        <Login
+          onClose={handleCloseLogin}
+          onSuccess={handleLoginSucesso}
         />
       )}
     </div>
