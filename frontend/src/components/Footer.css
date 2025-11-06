@@ -189,3 +189,36 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .footer-top {
+    padding: 30px 15px;
+  }
+
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .footer-section ul li a {
+    font-size: 0.9rem;
+  }
+
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .payment-icons img {
+    height: 25px;
+  }
+
+  .footer-middle {
+    padding: 25px 15px;
+  }
+
+  .footer-bottom {
+    padding: 15px;
+    font-size: 0.85rem;
+  }
+}

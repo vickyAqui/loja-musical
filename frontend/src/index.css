@@ -61,8 +61,27 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: rgba(107, 70, 193, 0.1);
 }
 
 #root {
   min-height: 100vh;
+}
+
+/* Melhorias para Touch e Mobile */
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: rgba(107, 70, 193, 0.2);
+  touch-action: manipulation;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Melhor visualização de imagens no mobile */
+img {
+  max-width: 100%;
+  height: auto;
 }

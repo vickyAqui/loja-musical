@@ -146,6 +146,13 @@ body {
   }
 }
 
+/* Tablets */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
 /* Responsividade Mobile */
 @media (max-width: 768px) {
   .hero-section {
@@ -185,10 +192,31 @@ body {
 
 @media (max-width: 480px) {
   .content-with-filters {
-    padding: 15px;
+    padding: 10px;
+  }
+
+  .category-filter {
+    padding: 15px 10px;
+    gap: 8px;
+  }
+
+  .category-filter button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    flex: 1 1 calc(50% - 8px);
+  }
+
+  .category-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
   }
 
   .products-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .hero-section {
+    height: 200px;
   }
 }

@@ -303,3 +303,48 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .header-top {
+    padding: 10px 15px;
+  }
+
+  .logo h1 {
+    font-size: 1.3rem;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .nav-icon span {
+    display: none;
+  }
+
+  .cart-badge {
+    top: -5px;
+    right: -5px;
+    font-size: 0.65rem;
+    min-width: 16px;
+    height: 16px;
+  }
+
+  .nav-menu {
+    padding: 8px 15px;
+    gap: 8px;
+  }
+
+  .nav-item {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+
+  .search-bar input {
+    font-size: 0.9rem;
+    padding: 10px 40px 10px 15px;
+  }
+
+  .search-bar button {
+    width: 35px;
+  }
+}
