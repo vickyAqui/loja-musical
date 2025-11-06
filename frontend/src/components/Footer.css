@@ -37,7 +37,7 @@
 }
 
 .footer-section ul li a:hover {
-  color: #8B0000;
+  color: var(--gold);
 }
 
 .social-links {
@@ -60,7 +60,7 @@
 }
 
 .social-links a:hover {
-  background-color: #8B0000;
+  background-color: var(--primary);
   transform: translateY(-3px);
 }
 

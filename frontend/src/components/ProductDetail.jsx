@@ -1,5 +1,6 @@
 import { FaStar, FaArrowLeft, FaShoppingCart } from 'react-icons/fa';
 import { MdLocalShipping } from 'react-icons/md';
+import Avaliacoes from './Avaliacoes';
 import './ProductDetail.css';
 
 const ProductDetail = ({ produto, onBack, onComprar, clienteLogado }) => {
@@ -98,6 +99,8 @@ const ProductDetail = ({ produto, onBack, onComprar, clienteLogado }) => {
             </div>
           </div>
         </div>
+
+        <Avaliacoes produtoId={produto.id} clienteLogado={clienteLogado} />
       </div>
     </div>
   );

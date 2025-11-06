@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #5a0000 0%, #8B0000 50%, #5a0000 100%);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-dark) 100%);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
 }
 
 .close-button:hover {
-  color: #8B0000;
+  color: var(--primary);
 }
 
 .cadastro-container h2 {
@@ -157,7 +157,7 @@
 }
 
 .input-with-icon input.error {
-  border: 2px solid #dc3545;
+  border: 2px solid var(--accent);
 }
 
 .input-with-icon input::placeholder {
@@ -165,7 +165,7 @@
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--accent);
   font-size: 0.85rem;
   padding-left: 20px;
   margin-top: -5px;
