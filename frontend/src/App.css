@@ -5,8 +5,9 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f5f5;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--background);
+  color: var(--color-text);
 }
 
 .app {
@@ -21,7 +22,7 @@ body {
 
 .hero-section {
   width: 100%;
-  height: 400px;
+  height: 350px;
   overflow: hidden;
   position: relative;
 }
@@ -30,64 +31,73 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.9);
 }
 
 .category-filter {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  padding: 30px 20px;
+  gap: 16px;
+  padding: 24px 5%;
   background-color: #fff;
   flex-wrap: wrap;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .category-filter button {
-  padding: 12px 30px;
-  font-size: 1rem;
-  font-weight: bold;
-  border: 2px solid #000;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 2px solid #e9ecef;
   background-color: #fff;
+  color: var(--gray-700);
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 8px;
   transition: all 0.3s;
+  letter-spacing: 0.3px;
 }
 
 .category-filter button:hover {
-  background-color: #8B0000;
+  background-color: var(--primary);
   color: #fff;
-  border-color: #8B0000;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.2);
 }
 
 .category-filter button.active {
-  background-color: #000;
+  background: var(--primary);
   color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.25);
 }
 
 .products-container {
-  padding: 40px 60px;
-  background: linear-gradient(180deg, #5a0000 0%, #8B0000 50%, #5a0000 100%);
+  padding: 48px 5%;
+  background-color: #f8f9fa;
   min-height: 600px;
 }
 
 .category-title {
-  color: #fff;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 40px;
-  font-style: italic;
+  color: var(--gray-900);
+  font-size: 1.8rem;
+  text-align: left;
+  margin-bottom: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
   max-width: 1400px;
   margin: 0 auto;
 }
 
 .loading, .no-products {
   text-align: center;
-  color: #fff;
+  color: var(--color-text);
   font-size: 1.2rem;
   padding: 50px 20px;
 }
@@ -109,17 +119,17 @@ body {
   }
 
   .products-container {
-    padding: 30px 20px;
+    padding: 40px 20px;
   }
 
   .category-title {
     font-size: 1.5rem;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
   }
 }
 

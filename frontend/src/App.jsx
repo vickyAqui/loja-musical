@@ -5,6 +5,7 @@ import ProductCard from './components/ProductCard';
 import ProductDetail from './components/ProductDetail';
 import CadastroCliente from './components/CadastroCliente';
 import Login from './components/Login';
+import Footer from './components/Footer';
 import './App.css';
 
 const App = () => {
@@ -152,6 +153,8 @@ const App = () => {
           )}
         </div>
       </main>
+
+      <Footer />
 
       {produtoSelecionado && (
         <ProductDetail 
