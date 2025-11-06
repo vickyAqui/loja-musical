@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { FiSearch, FiShoppingCart, FiUser, FiLogOut } from 'react-icons/fi';
+import { useCarrinho } from '../context/CarrinhoContext';
+import { FiSearch, FiShoppingCart, FiUser, FiLogOut, FiPackage } from 'react-icons/fi';
 import { GiGuitar, GiMusicalNotes, GiDrum } from 'react-icons/gi';
 import { BiDisc } from 'react-icons/bi';
 import { MdAlbum } from 'react-icons/md';
 import './Header.css';
 
-const Header = ({ onCadastroClick, onLoginClick, clienteLogado, onLogout }) => {
+const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoClick, clienteLogado, onLogout }) => {
+  const { getTotalItens } = useCarrinho();
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -40,6 +42,9 @@ const Header = ({ onCadastroClick, onLoginClick, clienteLogado, onLogout }) => {
                 <FiUser className="user-icon" />
                 <span className="user-name">Olá, {clienteLogado.nome.split(' ')[0]}</span>
               </div>
+              <button className="pedidos-button" onClick={onMeusPedidosClick} title="Meus Pedidos">
+                <FiPackage />
+              </button>
               <button className="logout-button" onClick={onLogout} title="Sair">
                 <FiLogOut />
               </button>
@@ -51,17 +56,18 @@ const Header = ({ onCadastroClick, onLoginClick, clienteLogado, onLogout }) => {
                 <span className="cadastre-text">Entrar</span>
               </button>
               <button className="user-button" onClick={onCadastroClick}>
-                <span className="cadastre-text">Cadastre-se</span>
-              </button>
-            </>
+              <span className="cadastre-text">Cadastre-se</span>
+            </button>
+          </>
           )}
-          <button className="cart-button">
+          <button className="cart-button" onClick={onCarrinhoClick}>
             <FiShoppingCart />
+            {getTotalItens() > 0 && (
+              <span className="cart-badge">{getTotalItens()}</span>
+            )}
           </button>
         </div>
-      </div>
-
-      <nav className="nav-menu">
+      </div>      <nav className="nav-menu">
         <a href="#lp-vinil" className="nav-item">
           <MdAlbum className="nav-icon" />
           LP/VINIL

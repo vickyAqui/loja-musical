@@ -1,20 +1,26 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useCarrinho } from './context/CarrinhoContext';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductDetail from './components/ProductDetail';
 import CadastroCliente from './components/CadastroCliente';
 import Login from './components/Login';
 import Footer from './components/Footer';
+import MeusPedidos from './components/MeusPedidos';
+import Carrinho from './components/Carrinho';
 import './App.css';
 
 const App = () => {
+  const { adicionarAoCarrinho } = useCarrinho();
   const [produtos, setProdutos] = useState([]);
   const [categoriaAtiva, setCategoriaAtiva] = useState('todos');
   const [loading, setLoading] = useState(true);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [mostrarMeusPedidos, setMostrarMeusPedidos] = useState(false);
+  const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
   const [clienteLogado, setClienteLogado] = useState(null);
 
   useEffect(() => {
@@ -61,8 +67,10 @@ const App = () => {
       setProdutoSelecionado(null);
       setMostrarLogin(true);
     } else {
-      // Aqui implementaríamos a lógica de compra
-      alert(`Compra iniciada! Cliente: ${clienteLogado.nome}`);
+      // Adicionar ao carrinho e fechar detalhes
+      adicionarAoCarrinho(produtoSelecionado);
+      setProdutoSelecionado(null);
+      setMostrarCarrinho(true);
     }
   };
 
@@ -97,11 +105,34 @@ const App = () => {
     setClienteLogado(null);
   };
 
+  const handleOpenMeusPedidos = () => {
+    setMostrarMeusPedidos(true);
+  };
+
+  const handleCloseMeusPedidos = () => {
+    setMostrarMeusPedidos(false);
+  };
+
+  const handleOpenCarrinho = () => {
+    setMostrarCarrinho(true);
+  };
+
+  const handleCloseCarrinho = () => {
+    setMostrarCarrinho(false);
+  };
+
+  const handleLoginRequired = () => {
+    setMostrarCarrinho(false);
+    setMostrarLogin(true);
+  };
+
   return (
     <div className="app">
       <Header 
         onCadastroClick={handleOpenCadastro}
         onLoginClick={handleOpenLogin}
+        onMeusPedidosClick={handleOpenMeusPedidos}
+        onCarrinhoClick={handleOpenCarrinho}
         clienteLogado={clienteLogado}
         onLogout={handleLogout}
       />
@@ -176,6 +207,22 @@ const App = () => {
         <Login
           onClose={handleCloseLogin}
           onSuccess={handleLoginSucesso}
+        />
+      )}
+
+      {mostrarMeusPedidos && (
+        <MeusPedidos
+          usuarioLogado={clienteLogado}
+          onVoltar={handleCloseMeusPedidos}
+        />
+      )}
+
+      {mostrarCarrinho && (
+        <Carrinho
+          isOpen={mostrarCarrinho}
+          onClose={handleCloseCarrinho}
+          usuarioLogado={clienteLogado}
+          onLoginRequired={handleLoginRequired}
         />
       )}
     </div>

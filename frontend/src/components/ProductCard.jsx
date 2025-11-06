@@ -1,7 +1,12 @@
 import { FaStar, FaShoppingCart, FaTruck } from 'react-icons/fa';
+import { useState } from 'react';
+import { useCarrinho } from '../context/CarrinhoContext';
+import Toast from './Toast';
 import './ProductCard.css';
 
-const ProductCard = ({ produto, onClick, onAddToCart }) => {
+const ProductCard = ({ produto, onClick }) => {
+  const { adicionarAoCarrinho } = useCarrinho();
+  const [mostrarToast, setMostrarToast] = useState(false);
   const renderStars = () => {
     return (
       <div className="stars">
@@ -28,16 +33,23 @@ const ProductCard = ({ produto, onClick, onAddToCart }) => {
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
-    if (onAddToCart) {
-      onAddToCart(produto);
-    }
+    adicionarAoCarrinho(produto);
+    setMostrarToast(true);
   };
 
   const desconto = calcularDesconto();
   const precoOriginal = produto.preco * 1.1;
 
   return (
-    <div className="product-card" onClick={() => onClick && onClick(produto)}>
+    <>
+      {mostrarToast && (
+        <Toast 
+          mensagem={`${produto.nome} adicionado ao carrinho!`}
+          onClose={() => setMostrarToast(false)}
+        />
+      )}
+      
+      <div className="product-card" onClick={() => onClick && onClick(produto)}>
       <div className="product-card-header">
         {desconto > 0 && (
           <span className="discount-badge">-{desconto}%</span>
@@ -83,6 +95,7 @@ const ProductCard = ({ produto, onClick, onAddToCart }) => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 
