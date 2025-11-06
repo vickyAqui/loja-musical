@@ -122,70 +122,142 @@
 }
 
 .pedidos-button {
-  background: transparent;
+  background-color: var(--gold);
   border: 2px solid var(--gold);
-  color: var(--gold);
-  font-size: 1.4rem;
+  color: #fff;
+  font-size: 1.2rem;
   cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
+  padding: 10px 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s;
+  font-weight: 600;
 }
 
 .pedidos-button:hover {
-  background-color: var(--gold);
-  color: #fff;
-  transform: scale(1.05);
+  background-color: #b8941f;
+  border-color: #b8941f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
 .logout-button {
-  background: transparent;
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  font-size: 1.4rem;
+  background-color: #dc3545;
+  border: 2px solid #dc3545;
+  color: #fff;
+  font-size: 1.2rem;
   cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
+  padding: 10px 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s;
+  font-weight: 600;
 }
 
 .logout-button:hover {
-  background-color: var(--accent);
+  background-color: #c82333;
+  border-color: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.admin-button {
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
   color: #fff;
-  transform: scale(1.05);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.admin-button:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.3);
 }
 
 .user-button {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: transparent;
-  border: none;
+  background-color: var(--primary);
+  color: #fff;
+  border: 2px solid var(--primary);
   cursor: pointer;
   font-size: 1rem;
-  transition: transform 0.2s;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-weight: 600;
 }
 
 .user-button:hover {
-  transform: scale(1.05);
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.login-button,
+.register-button {
+  background-color: var(--primary);
+  color: #fff;
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  white-space: nowrap;
+}
+
+.login-button svg,
+.login-button .user-icon,
+.register-button svg,
+.register-button .user-icon,
+.register-button .cadastre-text {
+  display: none !important;
+}
+
+.login-button:hover,
+.register-button:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.3);
+}
+
+.register-button {
+  background-color: var(--gold);
+  border-color: var(--gold);
+}
+
+.register-button:hover {
+  background-color: #b8941f;
+  border-color: #b8941f;
 }
 
 .user-icon {
-  font-size: 1.8rem;
-  color: var(--primary);
+  font-size: 1.2rem;
+  color: #fff;
 }
 
 .cadastre-text {
-  font-family: 'Cooper Black', serif;
-  font-weight: bold;
-  font-style: italic;
-  color: var(--gray-900);
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.95rem;
 }
 
 .cart-button {
@@ -284,7 +356,13 @@
   }
 
   .header-actions {
-    gap: 15px;
+    gap: 10px;
+  }
+
+  .login-button,
+  .register-button {
+    padding: 10px 16px;
+    font-size: 0.85rem;
   }
 
   .cadastre-text {

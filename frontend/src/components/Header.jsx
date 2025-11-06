@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useCarrinho } from '../context/CarrinhoContext';
-import { FiSearch, FiShoppingCart, FiUser, FiLogOut, FiPackage } from 'react-icons/fi';
+import { FiSearch, FiShoppingCart, FiUser, FiLogOut, FiPackage, FiSettings } from 'react-icons/fi';
 import { GiGuitar, GiMusicalNotes, GiDrum } from 'react-icons/gi';
 import { BiDisc } from 'react-icons/bi';
 import { MdAlbum } from 'react-icons/md';
 import './Header.css';
 
-const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoClick, onBuscar, clienteLogado, onLogout }) => {
+const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoClick, onBuscar, clienteLogado, onLogout, onAdminClick }) => {
   const { getTotalItens } = useCarrinho();
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -67,20 +67,22 @@ const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoC
               <button className="pedidos-button" onClick={onMeusPedidosClick} title="Meus Pedidos">
                 <FiPackage />
               </button>
+              <button className="admin-button" onClick={onAdminClick} title="Painel Admin">
+                <FiSettings />
+              </button>
               <button className="logout-button" onClick={onLogout} title="Sair">
                 <FiLogOut />
               </button>
             </>
           ) : (
             <>
-              <button className="user-button" onClick={onLoginClick}>
-                <FiUser className="user-icon" />
-                <span className="cadastre-text">Entrar</span>
+              <button className="login-button" onClick={onLoginClick}>
+                Entrar
               </button>
-              <button className="user-button" onClick={onCadastroClick}>
-              <span className="cadastre-text">Cadastre-se</span>
-            </button>
-          </>
+              <button className="register-button" onClick={onCadastroClick}>
+                Cadastre-se
+              </button>
+            </>
           )}
           <button className="cart-button" onClick={onCarrinhoClick}>
             <FiShoppingCart />

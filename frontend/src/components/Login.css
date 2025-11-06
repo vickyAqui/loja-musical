@@ -126,14 +126,15 @@
 .input-icon {
   position: absolute;
   left: 20px;
-  font-size: 1.4rem;
-  color: #666;
+  font-size: 1.3rem;
+  color: var(--primary);
   z-index: 1;
+  pointer-events: none;
 }
 
 .input-with-icon input {
   width: 100%;
-  padding: 20px 20px 20px 55px;
+  padding: 20px 20px 20px 60px;
   border: none;
   border-radius: 30px;
   font-size: 1rem;
@@ -212,12 +213,12 @@
   }
 
   .input-with-icon input {
-    padding: 18px 20px 18px 50px;
+    padding: 18px 20px 18px 55px;
     font-size: 0.95rem;
   }
 
   .input-icon {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     left: 18px;
   }
 

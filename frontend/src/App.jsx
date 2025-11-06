@@ -6,6 +6,8 @@ import ProductCard from './components/ProductCard';
 import ProductDetail from './components/ProductDetail';
 import CadastroCliente from './components/CadastroCliente';
 import Login from './components/Login';
+import LoginAdmin from './components/LoginAdmin';
+import PainelAdmin from './components/PainelAdmin';
 import Footer from './components/Footer';
 import MeusPedidos from './components/MeusPedidos';
 import Carrinho from './components/Carrinho';
@@ -26,6 +28,9 @@ const App = () => {
   const [mostrarMeusPedidos, setMostrarMeusPedidos] = useState(false);
   const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
   const [clienteLogado, setClienteLogado] = useState(null);
+  const [mostrarLoginAdmin, setMostrarLoginAdmin] = useState(false);
+  const [adminLogado, setAdminLogado] = useState(null);
+  const [mostrarPainelAdmin, setMostrarPainelAdmin] = useState(false);
 
   useEffect(() => {
     // Verificar se há cliente logado no localStorage
@@ -218,6 +223,25 @@ const App = () => {
     setMostrarLogin(true);
   };
 
+  const handleOpenLoginAdmin = () => {
+    setMostrarLoginAdmin(true);
+  };
+
+  const handleCloseLoginAdmin = () => {
+    setMostrarLoginAdmin(false);
+  };
+
+  const handleLoginAdminSucesso = (admin) => {
+    setAdminLogado(admin);
+    setMostrarLoginAdmin(false);
+    setMostrarPainelAdmin(true);
+  };
+
+  const handleClosePainelAdmin = () => {
+    setMostrarPainelAdmin(false);
+    setAdminLogado(null);
+  };
+
   return (
     <div className="app">
       <Header 
@@ -228,6 +252,7 @@ const App = () => {
         onBuscar={handleBuscar}
         clienteLogado={clienteLogado}
         onLogout={handleLogout}
+        onAdminClick={handleOpenLoginAdmin}
       />
       
       <main className="main-content">
@@ -341,6 +366,20 @@ const App = () => {
           onClose={handleCloseCarrinho}
           usuarioLogado={clienteLogado}
           onLoginRequired={handleLoginRequired}
+        />
+      )}
+
+      {mostrarLoginAdmin && (
+        <LoginAdmin
+          onClose={handleCloseLoginAdmin}
+          onSuccess={handleLoginAdminSucesso}
+        />
+      )}
+
+      {mostrarPainelAdmin && adminLogado && (
+        <PainelAdmin
+          admin={adminLogado}
+          onClose={handleClosePainelAdmin}
         />
       )}
     </div>

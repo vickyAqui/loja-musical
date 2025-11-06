@@ -134,13 +134,14 @@
   position: absolute;
   left: 20px;
   font-size: 1.3rem;
-  color: #666;
+  color: var(--primary);
   z-index: 1;
+  pointer-events: none;
 }
 
 .input-with-icon input {
   width: 100%;
-  padding: 18px 20px 18px 55px;
+  padding: 18px 20px 18px 60px;
   border: none;
   border-radius: 30px;
   font-size: 1rem;
@@ -211,7 +212,7 @@
   }
 
   .input-with-icon input {
-    padding: 15px 20px 15px 50px;
+    padding: 15px 20px 15px 55px;
     font-size: 0.95rem;
   }
 
