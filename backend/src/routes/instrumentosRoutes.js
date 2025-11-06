@@ -4,7 +4,7 @@ const connection = require('../config/db');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM instrumentos', (err, results) => {
+  connection.query('SELECT * FROM produtos', (err, results) => {
     if (err) {
       console.error('Erro ao buscar instrumentos:', err);
       res.status(500).send('Erro ao buscar instrumentos');
