@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Footer from './components/Footer';
 import MeusPedidos from './components/MeusPedidos';
 import Carrinho from './components/Carrinho';
+import Filtros from './components/Filtros';
 import './App.css';
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
   const [produtosFiltrados, setProdutosFiltrados] = useState([]);
   const [categoriaAtiva, setCategoriaAtiva] = useState('todos');
   const [termoBusca, setTermoBusca] = useState('');
+  const [filtrosAvancados, setFiltrosAvancados] = useState({ tipos: [], preco: null });
   const [loading, setLoading] = useState(true);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
@@ -39,7 +41,7 @@ const App = () => {
   // Atualizar produtos filtrados quando mudar categoria ou termo de busca
   useEffect(() => {
     filtrarProdutos();
-  }, [produtos, categoriaAtiva, termoBusca]);
+  }, [produtos, categoriaAtiva, termoBusca, filtrosAvancados]);
 
   const carregarProdutos = () => {
     axios.get('http://localhost:3001/api/instrumentos')
@@ -68,6 +70,40 @@ const App = () => {
         p.nome.toLowerCase().includes(termo) || 
         (p.marca && p.marca.toLowerCase().includes(termo))
       );
+    }
+
+    // Filtrar por tipo de instrumento (Cordas, Percussão, etc)
+    if (filtrosAvancados.tipos.length > 0) {
+      resultados = resultados.filter(p => {
+        const nomeLower = p.nome.toLowerCase();
+        
+        return filtrosAvancados.tipos.some(tipo => {
+          switch(tipo) {
+            case 'cordas':
+              return nomeLower.includes('violão') || nomeLower.includes('guitarra') || 
+                     nomeLower.includes('baixo') || nomeLower.includes('cavaco') ||
+                     nomeLower.includes('ukulele');
+            case 'percussao':
+              return nomeLower.includes('bateria') || nomeLower.includes('tambor') || 
+                     nomeLower.includes('pandeiro') || nomeLower.includes('cajón') ||
+                     nomeLower.includes('bumbo') || nomeLower.includes('caixa');
+            case 'teclas':
+              return nomeLower.includes('piano') || nomeLower.includes('teclado') || 
+                     nomeLower.includes('órgão') || nomeLower.includes('sintetizador');
+            case 'sopro':
+              return nomeLower.includes('saxofone') || nomeLower.includes('flauta') || 
+                     nomeLower.includes('trompete') || nomeLower.includes('clarinete');
+            default:
+              return false;
+          }
+        });
+      });
+    }
+
+    // Filtrar por faixa de preço
+    if (filtrosAvancados.preco) {
+      const { min, max } = filtrosAvancados.preco;
+      resultados = resultados.filter(p => p.preco >= min && p.preco <= max);
     }
 
     setProdutosFiltrados(resultados);
@@ -112,6 +148,10 @@ const App = () => {
 
   const handleCloseDetail = () => {
     setProdutoSelecionado(null);
+  };
+
+  const handleFiltrosChange = (novosFiltros) => {
+    setFiltrosAvancados(novosFiltros);
   };
 
   const handleComprarClick = () => {
@@ -217,7 +257,13 @@ const App = () => {
           ))}
         </div>
 
-        <div className="products-container">
+        <div className="content-with-filters">
+          <Filtros 
+            onFiltrosChange={handleFiltrosChange}
+            filtrosAtivos={filtrosAvancados}
+          />
+
+          <div className="products-container">
           <h2 className="category-title">
             {termoBusca ? `Resultados para "${termoBusca}"` : categoriasMap[categoriaAtiva]}
             {termoBusca && ` (${produtosFiltrados.length} produtos)`}
@@ -254,6 +300,7 @@ const App = () => {
             </div>
           )}
         </div>
+      </div>
       </main>
 
       <Footer />
