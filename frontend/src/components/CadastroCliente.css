@@ -1,0 +1,227 @@
+.cadastro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #5a0000 0%, #8B0000 50%, #5a0000 100%);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Decoração de notas musicais */
+.cadastro-overlay::before,
+.cadastro-overlay::after {
+  content: '♪ ♫ ♪';
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.2);
+  animation: float 4s ease-in-out infinite;
+}
+
+.cadastro-overlay::before {
+  top: 10%;
+  left: 10%;
+}
+
+.cadastro-overlay::after {
+  bottom: 10%;
+  right: 10%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.cadastro-container {
+  background-color: #fff;
+  border-radius: 40px;
+  padding: 50px 40px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s;
+  padding: 5px;
+}
+
+.close-button:hover {
+  color: #8B0000;
+}
+
+.cadastro-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #000;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-style: italic;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cadastro-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+}
+
+.mensagem {
+  padding: 15px;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mensagem.sucesso {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.mensagem.erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.cadastro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 20px;
+  font-size: 1.3rem;
+  color: #666;
+  z-index: 1;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 18px 20px 18px 55px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  outline: none;
+}
+
+.input-with-icon input:focus {
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.input-with-icon input.error {
+  border: 2px solid #dc3545;
+}
+
+.input-with-icon input::placeholder {
+  color: #999;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  padding-left: 20px;
+  margin-top: -5px;
+}
+
+.submit-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.submit-button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+  .cadastro-container {
+    padding: 40px 25px;
+    border-radius: 30px;
+  }
+
+  .cadastro-container h2 {
+    font-size: 2rem;
+  }
+
+  .input-with-icon input {
+    padding: 15px 20px 15px 50px;
+    font-size: 0.95rem;
+  }
+
+  .input-icon {
+    font-size: 1.1rem;
+    left: 18px;
+  }
+
+  .submit-button {
+    padding: 15px 30px;
+    font-size: 1rem;
+  }
+}

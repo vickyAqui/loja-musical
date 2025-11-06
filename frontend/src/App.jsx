@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductDetail from './components/ProductDetail';
+import CadastroCliente from './components/CadastroCliente';
 import './App.css';
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   const [categoriaAtiva, setCategoriaAtiva] = useState('todos');
   const [loading, setLoading] = useState(true);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+  const [mostrarCadastro, setMostrarCadastro] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/instrumentos')
@@ -43,9 +45,22 @@ const App = () => {
     setProdutoSelecionado(null);
   };
 
+  const handleOpenCadastro = () => {
+    setMostrarCadastro(true);
+  };
+
+  const handleCloseCadastro = () => {
+    setMostrarCadastro(false);
+  };
+
+  const handleCadastroSucesso = () => {
+    setMostrarCadastro(false);
+    // Aqui poderia redirecionar para login ou outra ação
+  };
+
   return (
     <div className="app">
-      <Header />
+      <Header onCadastroClick={handleOpenCadastro} />
       
       <main className="main-content">
         <div className="hero-section">
@@ -99,6 +114,13 @@ const App = () => {
         <ProductDetail 
           produto={produtoSelecionado}
           onBack={handleCloseDetail}
+        />
+      )}
+
+      {mostrarCadastro && (
+        <CadastroCliente
+          onClose={handleCloseCadastro}
+          onSuccess={handleCadastroSucesso}
         />
       )}
     </div>

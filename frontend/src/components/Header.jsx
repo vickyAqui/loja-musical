@@ -5,7 +5,7 @@ import { BiDisc } from 'react-icons/bi';
 import { MdAlbum } from 'react-icons/md';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onCadastroClick }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -34,7 +34,7 @@ const Header = () => {
         </div>
 
         <div className="header-actions">
-          <button className="user-button">
+          <button className="user-button" onClick={onCadastroClick}>
             <FiUser className="user-icon" />
             <span className="cadastre-text">Cadastre-se</span>
           </button>
