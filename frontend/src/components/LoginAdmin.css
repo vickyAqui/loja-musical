@@ -66,17 +66,17 @@
 
 .input-icon {
   position: absolute;
-  left: 15px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--primary);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   pointer-events: none;
 }
 
 .input-with-icon input {
   width: 100%;
-  padding: 15px 15px 15px 50px;
+  padding: 15px 15px 15px 45px;
   border: 2px solid #ddd;
   border-radius: 10px;
   font-size: 1rem;
@@ -153,7 +153,12 @@
   }
 
   .input-with-icon input {
-    padding: 12px 12px 12px 45px;
+    padding: 12px 12px 12px 42px;
+  }
+
+  .input-icon {
+    font-size: 1rem;
+    left: 12px;
   }
 
   .submit-button {

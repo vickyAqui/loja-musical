@@ -67,9 +67,6 @@ const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoC
               <button className="pedidos-button" onClick={onMeusPedidosClick} title="Meus Pedidos">
                 <FiPackage />
               </button>
-              <button className="admin-button" onClick={onAdminClick} title="Painel Admin">
-                <FiSettings />
-              </button>
               <button className="logout-button" onClick={onLogout} title="Sair">
                 <FiLogOut />
               </button>
@@ -84,6 +81,9 @@ const Header = ({ onCadastroClick, onLoginClick, onMeusPedidosClick, onCarrinhoC
               </button>
             </>
           )}
+          <button className="admin-button" onClick={onAdminClick} title="Painel Admin">
+            <FiSettings />
+          </button>
           <button className="cart-button" onClick={onCarrinhoClick}>
             <FiShoppingCart />
             {getTotalItens() > 0 && (

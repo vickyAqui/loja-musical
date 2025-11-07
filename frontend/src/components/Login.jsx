@@ -109,7 +109,6 @@ const Login = ({ onClose, onSuccess }) => {
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <div className="input-with-icon">
-              <FiMail className="input-icon" />
               <input
                 type="email"
                 id="email"
@@ -125,7 +124,6 @@ const Login = ({ onClose, onSuccess }) => {
 
           <div className="form-group">
             <div className="input-with-icon">
-              <FiLock className="input-icon" />
               <input
                 type="password"
                 id="senha"

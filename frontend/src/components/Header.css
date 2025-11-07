@@ -144,9 +144,9 @@
 }
 
 .logout-button {
-  background-color: #dc3545;
-  border: 2px solid #dc3545;
-  color: #fff;
+  background-color: #dc3545 !important;
+  border: 2px solid #dc3545 !important;
+  color: #fff !important;
   font-size: 1.2rem;
   cursor: pointer;
   padding: 10px 12px;
@@ -158,9 +158,13 @@
   font-weight: 600;
 }
 
+.logout-button svg {
+  color: #fff !important;
+}
+
 .logout-button:hover {
-  background-color: #c82333;
-  border-color: #c82333;
+  background-color: #c82333 !important;
+  border-color: #c82333 !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }

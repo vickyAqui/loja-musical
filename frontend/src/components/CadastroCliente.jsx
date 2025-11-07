@@ -145,7 +145,6 @@ const CadastroCliente = ({ onClose, onSuccess }) => {
           <div className="form-group">
             <label htmlFor="nome">Nome Completo *</label>
             <div className="input-with-icon">
-              <FiUser className="input-icon" />
               <input
                 type="text"
                 id="nome"
@@ -162,7 +161,6 @@ const CadastroCliente = ({ onClose, onSuccess }) => {
           <div className="form-group">
             <label htmlFor="email">Email *</label>
             <div className="input-with-icon">
-              <FiMail className="input-icon" />
               <input
                 type="email"
                 id="email"
@@ -179,7 +177,6 @@ const CadastroCliente = ({ onClose, onSuccess }) => {
           <div className="form-group">
             <label htmlFor="senha">Senha *</label>
             <div className="input-with-icon">
-              <FiLock className="input-icon" />
               <input
                 type="password"
                 id="senha"
@@ -196,7 +193,6 @@ const CadastroCliente = ({ onClose, onSuccess }) => {
           <div className="form-group">
             <label htmlFor="confirmarSenha">Confirmar Senha *</label>
             <div className="input-with-icon">
-              <FiLock className="input-icon" />
               <input
                 type="password"
                 id="confirmarSenha"
@@ -213,7 +209,6 @@ const CadastroCliente = ({ onClose, onSuccess }) => {
           <div className="form-group">
             <label htmlFor="telefone">Telefone</label>
             <div className="input-with-icon">
-              <FiPhone className="input-icon" />
               <input
                 type="tel"
                 id="telefone"
